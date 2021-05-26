@@ -57,6 +57,12 @@ public class Table
 		_map.put(key, value);
 	}
 	
+	public boolean contains(int items, int width)
+	{
+		Key key = new Key(items, width);
+		return _map.containsKey(key);
+	}
+	
 	public boolean get(int items, int width)
 	{
 		Key key = new Key(items, width);

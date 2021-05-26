@@ -21,6 +21,17 @@ class TableTest
 	}
 
 	@Test
+	void tableContainsKey()
+	{
+		Table table = new Table();
+		table.set(2, 200, false);
+		
+		assertFalse(table.contains(1, 200));
+		assertFalse(table.contains(2, 100));
+		assertTrue(table.contains(2, 200));
+	}
+
+	@Test
 	void tableNonexistentGet()
 	{
 		Table table = new Table();

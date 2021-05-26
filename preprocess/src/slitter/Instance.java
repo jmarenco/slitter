@@ -49,7 +49,7 @@ public class Instance
 	public int getItem(int i, int j)
 	{
 		if (j < 0 || j >= getItems(i) )
-			throw new IllegalArgumentException("No such item!");
+			throw new IllegalArgumentException("No such item! comb = " + i + ", item = " + j);
 		
 		return _items[i][j];
 	}
