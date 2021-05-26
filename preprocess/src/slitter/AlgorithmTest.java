@@ -29,5 +29,6 @@ class AlgorithmTest
 		assertTrue(new Algorithm(_instance, 1, 1, 3, 0).solve());
 		assertTrue(new Algorithm(_instance, 1, 2, 3, 0).solve());
 		assertFalse(new Algorithm(_instance, 1, 0, 3, 0).solve());
+		assertTrue(new Algorithm(_instance, 1, 0, 2, 1).solve());
 	}
 }
