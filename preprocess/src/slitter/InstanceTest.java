@@ -26,7 +26,6 @@ class InstanceTest
 	void accessNonexistingItem() throws FileNotFoundException
 	{
 		Instance instance = new Instance("../instances/test.dat");
-		
 		Assertions.assertThrows(IllegalArgumentException.class, () -> { instance.getItem(0, 2); });
 	}
 }
