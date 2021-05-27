@@ -35,6 +35,10 @@ class AlgorithmTest
 		// Test 3:
 		// Combination 1 = 8 10 5 6 4
 		// Combination 2 = 6 9 5 4 7 5
+		
+		// Test 4:
+		// Combination 1 = 6 4 8
+		// Combination 2 = 3 6 4
 	}
 	
 	@Test
