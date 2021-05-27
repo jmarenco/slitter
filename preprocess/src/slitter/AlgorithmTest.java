@@ -12,6 +12,7 @@ class AlgorithmTest
 	private Instance _test;
 	private Instance _test2;
 	private Instance _test3;
+	private Instance _test4;
 	
 	@BeforeEach
 	void initialize() throws FileNotFoundException
@@ -19,6 +20,7 @@ class AlgorithmTest
 		_test = new Instance("../instances/test.dat");
 		_test2 = new Instance("../instances/test2.dat");
 		_test3 = new Instance("../instances/test3.dat");
+		_test4 = new Instance("../instances/test4.dat");
 		
 		// Test:
 		// Combination 1 = 200 200
@@ -59,5 +61,15 @@ class AlgorithmTest
 		assertTrue(new Algorithm(_test3, 0, 4, 1, 5).solve());
 		assertTrue(new Algorithm(_test3, 0, 4, 1, 4).solve());
 		assertTrue(new Algorithm(_test3, 0, 3, 1, 4).solve());
+	}
+	
+	@Test
+	void differentParityInstance()
+	{
+		assertFalse(new Algorithm(_test4, 0, 0, 1, 0).solve());
+		assertFalse(new Algorithm(_test4, 0, 1, 1, 0).solve());
+		assertFalse(new Algorithm(_test4, 0, 2, 1, 0).solve());
+		assertFalse(new Algorithm(_test4, 0, 2, 1, 1).solve());
+		assertFalse(new Algorithm(_test4, 0, 2, 1, 2).solve());
 	}
 }
