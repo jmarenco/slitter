@@ -9,26 +9,55 @@ import org.junit.jupiter.api.Test;
 
 class AlgorithmTest
 {
-	private Instance _instance;
+	private Instance _test;
+	private Instance _test2;
+	private Instance _test3;
 	
 	@BeforeEach
 	void initialize() throws FileNotFoundException
 	{
-		_instance = new Instance("../instances/test.dat");
+		_test = new Instance("../instances/test.dat");
+		_test2 = new Instance("../instances/test2.dat");
+		_test3 = new Instance("../instances/test3.dat");
 		
+		// Test:
 		// Combination 1 = 200 200
 		// Combination 2 = 100 200 300
 		// Combination 3 = 150 250
 		// Combination 4 = 250 250
+
+		// Test 2:
+		// Combination 1 = 8 10 5 6 3 4
+		// Combination 2 = 6 9 5 4 7 5
+
+		// Test 3:
+		// Combination 1 = 8 10 5 6 4
+		// Combination 2 = 6 9 5 4 7 5
 	}
 	
 	@Test
 	void testInstance()
 	{
-		assertTrue(new Algorithm(_instance, 0, 0, 1, 1).solve());
-		assertTrue(new Algorithm(_instance, 1, 1, 3, 0).solve());
-		assertTrue(new Algorithm(_instance, 1, 2, 3, 0).solve());
-		assertFalse(new Algorithm(_instance, 1, 0, 3, 0).solve());
-		assertTrue(new Algorithm(_instance, 1, 0, 2, 1).solve());
+		assertTrue(new Algorithm(_test, 0, 0, 1, 1).solve());
+		assertTrue(new Algorithm(_test, 1, 1, 3, 0).solve());
+		assertTrue(new Algorithm(_test, 1, 2, 3, 0).solve());
+		assertFalse(new Algorithm(_test, 1, 0, 3, 0).solve());
+		assertTrue(new Algorithm(_test, 1, 0, 2, 1).solve());
+	}
+	
+	@Test
+	void sameSumInstance()
+	{
+		for(int i=0; i<6; ++i)
+		for(int j=0; j<6; ++j)
+			assertTrue(new Algorithm(_test2, 0, i, 1, j).solve());
+	}
+	
+	@Test
+	void manyItemsInstance()
+	{
+		assertTrue(new Algorithm(_test3, 0, 4, 1, 5).solve());
+		assertTrue(new Algorithm(_test3, 0, 4, 1, 4).solve());
+		assertTrue(new Algorithm(_test3, 0, 3, 1, 4).solve());
 	}
 }
