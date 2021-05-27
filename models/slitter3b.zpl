@@ -27,6 +27,9 @@ param trim[<c> in C] := sum <i> in I: a[c,i];
 # Ancho del papel
 param ancho := max <c> in C: sum <i> in I: a[c,i];
 
+# Pares de items que pueden coincidir
+set posibles := { read archivoposibles as "<1n,2n,3n,4n>" };
+
 # Variables
 var x[C0*C0] binary;
 var y[C*I0*I0] binary;
@@ -97,4 +100,7 @@ subto ref1: forall <c,i> in C*I:
 
 subto ref2: forall <c,i> in C*I:
     sum <ip> in I: z[c,ip,i] <= 1;
-
+    
+subto ref3: forall <c,i,j> in C*I*I with i <= items[c]:
+    z[c,i,j] <= sum <cp> in C with <c-1,cp-1,i-1,j-1> in posibles: x[c,cp];
+    
