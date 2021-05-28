@@ -11,16 +11,20 @@ class IncompleteEqualizerTest
 {
 	private Instance _test;
 //	private Instance _test2;
-//	private Instance _test3;
-//	private Instance _test4;
+	private Instance _test3;
+	private Instance _test4;
+	private Instance _test5;
+	private Instance _test6;
 	
 	@BeforeEach
 	void initialize() throws FileNotFoundException
 	{
 		_test = new Instance("../instances/test.dat");
 //		_test2 = new Instance("../instances/test2.dat");
-//		_test3 = new Instance("../instances/test3.dat");
-//		_test4 = new Instance("../instances/test4.dat");
+		_test3 = new Instance("../instances/test3.dat");
+		_test4 = new Instance("../instances/test4.dat");
+		_test5 = new Instance("../instances/test5.dat");
+		_test6 = new Instance("../instances/test6.dat");
 		
 		// Test:
 		// Combination 1 = 200 200
@@ -39,6 +43,14 @@ class IncompleteEqualizerTest
 		// Test 4:
 		// Combination 1 = 6 4 8
 		// Combination 2 = 3 6 4
+		
+		// Test 5:
+		// Combination 1 = 10 10 10
+		// Combination 2 = 10 10 6 4
+		
+		// Test 6:
+		// Combination 1 = 11 11 8
+		// Combination 2 = 10 10 6 4
 	}
 	
 	@Test
@@ -48,5 +60,39 @@ class IncompleteEqualizerTest
 		assertFalse(new IncompleteEqualizer(_test, 0, 0, 2, 1).solve());
 		assertFalse(new IncompleteEqualizer(_test, 2, 1, 0, 0).solve());
 		assertFalse(new IncompleteEqualizer(_test, 2, 0, 0, 0).solve());
+	}
+	
+	@Test
+	void manyItemsInstance()
+	{
+		assertTrue(new IncompleteEqualizer(_test3, 0, 4, 1, 5).solve());
+		assertTrue(new IncompleteEqualizer(_test3, 0, 4, 1, 4).solve());
+		assertTrue(new IncompleteEqualizer(_test3, 0, 3, 1, 4).solve());
+	}
+	
+	@Test
+	void differentParityInstance()
+	{
+		assertFalse(new IncompleteEqualizer(_test4, 0, 0, 1, 0).solve());
+		assertFalse(new IncompleteEqualizer(_test4, 0, 1, 1, 0).solve());
+		assertFalse(new IncompleteEqualizer(_test4, 0, 2, 1, 0).solve());
+		assertFalse(new IncompleteEqualizer(_test4, 0, 2, 1, 1).solve());
+		assertFalse(new IncompleteEqualizer(_test4, 0, 2, 1, 2).solve());
+	}
+	
+	@Test
+	void equalSumInstance()
+	{
+		for(int i=0; i<3; ++i)
+		for(int j=0; j<4; ++j)
+			assertTrue(new IncompleteEqualizer(_test5, 0, i, 1, j).solve());
+	}
+	
+	@Test
+	void modifiedEqualSumInstance()
+	{
+		for(int i=0; i<3; ++i)
+		for(int j=0; j<4; ++j)
+			assertFalse(new IncompleteEqualizer(_test6, 0, i, 1, j).solve());
 	}
 }
