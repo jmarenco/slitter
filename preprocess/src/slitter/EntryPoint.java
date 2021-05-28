@@ -15,7 +15,7 @@ public class EntryPoint {
 		}
 		
 		String input = args[0];
-		String output = changeExtension(input, ".pos");
+		String output = input + ".pos";
 		System.out.println("Processing file " + input);
 
 		Instance instance = new Instance(input);
@@ -42,10 +42,4 @@ public class EntryPoint {
 		System.out.printf("Total time: %.2f sec.", (System.currentTimeMillis() - start) / 1000.0);
 		System.out.println();
 	}
-	
-	private static String changeExtension(String fileName, String newExtension)
-	{
-		int i = fileName.lastIndexOf('.');
-		return fileName.substring(0,i) + newExtension;
-	}		
 }
