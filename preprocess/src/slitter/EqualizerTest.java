@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AlgorithmTest
+class EqualizerTest
 {
 	private Instance _test;
 	private Instance _test2;
@@ -44,11 +44,11 @@ class AlgorithmTest
 	@Test
 	void testInstance()
 	{
-		assertTrue(new Algorithm(_test, 0, 0, 1, 1).solve());
-		assertTrue(new Algorithm(_test, 1, 1, 3, 0).solve());
-		assertTrue(new Algorithm(_test, 1, 2, 3, 0).solve());
-		assertFalse(new Algorithm(_test, 1, 0, 3, 0).solve());
-		assertTrue(new Algorithm(_test, 1, 0, 2, 1).solve());
+		assertTrue(new Equalizer(_test, 0, 0, 1, 1).solve());
+		assertTrue(new Equalizer(_test, 1, 1, 3, 0).solve());
+		assertTrue(new Equalizer(_test, 1, 2, 3, 0).solve());
+		assertFalse(new Equalizer(_test, 1, 0, 3, 0).solve());
+		assertTrue(new Equalizer(_test, 1, 0, 2, 1).solve());
 	}
 	
 	@Test
@@ -56,24 +56,24 @@ class AlgorithmTest
 	{
 		for(int i=0; i<6; ++i)
 		for(int j=0; j<6; ++j)
-			assertTrue(new Algorithm(_test2, 0, i, 1, j).solve());
+			assertTrue(new Equalizer(_test2, 0, i, 1, j).solve());
 	}
 	
 	@Test
 	void manyItemsInstance()
 	{
-		assertTrue(new Algorithm(_test3, 0, 4, 1, 5).solve());
-		assertTrue(new Algorithm(_test3, 0, 4, 1, 4).solve());
-		assertTrue(new Algorithm(_test3, 0, 3, 1, 4).solve());
+		assertTrue(new Equalizer(_test3, 0, 4, 1, 5).solve());
+		assertTrue(new Equalizer(_test3, 0, 4, 1, 4).solve());
+		assertTrue(new Equalizer(_test3, 0, 3, 1, 4).solve());
 	}
 	
 	@Test
 	void differentParityInstance()
 	{
-		assertFalse(new Algorithm(_test4, 0, 0, 1, 0).solve());
-		assertFalse(new Algorithm(_test4, 0, 1, 1, 0).solve());
-		assertFalse(new Algorithm(_test4, 0, 2, 1, 0).solve());
-		assertFalse(new Algorithm(_test4, 0, 2, 1, 1).solve());
-		assertFalse(new Algorithm(_test4, 0, 2, 1, 2).solve());
+		assertFalse(new Equalizer(_test4, 0, 0, 1, 0).solve());
+		assertFalse(new Equalizer(_test4, 0, 1, 1, 0).solve());
+		assertFalse(new Equalizer(_test4, 0, 2, 1, 0).solve());
+		assertFalse(new Equalizer(_test4, 0, 2, 1, 1).solve());
+		assertFalse(new Equalizer(_test4, 0, 2, 1, 2).solve());
 	}
 }

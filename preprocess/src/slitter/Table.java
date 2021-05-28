@@ -11,13 +11,22 @@ public class Table
 	{
 		public int items;
 		public int width;
+		public boolean skip;
 		
 		public Key(int i, int w)
 		{
 			items = i;
 			width = w;
+			skip = false;
 		}
 		
+		public Key(int i, int w, boolean s)
+		{
+			items = i;
+			width = w;
+			skip = s;
+		}
+
 		@Override
 		public int hashCode()
 		{
@@ -42,6 +51,8 @@ public class Table
 				return false;
 			if (width != other.width)
 				return false;
+			if (skip != other.skip)
+				return false;
 			return true;
 		}
 	}
@@ -57,15 +68,37 @@ public class Table
 		_map.put(key, value);
 	}
 	
+	public void set(int items, int width, boolean skip, boolean value)
+	{
+		Key key = new Key(items, width, skip);
+		_map.put(key, value);
+	}
+
 	public boolean contains(int items, int width)
 	{
 		Key key = new Key(items, width);
+		return _map.containsKey(key);
+	}
+
+	public boolean contains(int items, int width, boolean skip)
+	{
+		Key key = new Key(items, width, skip);
 		return _map.containsKey(key);
 	}
 	
 	public boolean get(int items, int width)
 	{
 		Key key = new Key(items, width);
+		
+		if (_map.containsKey(key) == false)
+			throw new IllegalArgumentException("No such key!");
+		
+		return _map.get(key);
+	}
+	
+	public boolean get(int items, int width, boolean skip)
+	{
+		Key key = new Key(items, width, skip);
 		
 		if (_map.containsKey(key) == false)
 			throw new IllegalArgumentException("No such key!");

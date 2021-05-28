@@ -39,4 +39,17 @@ class TableTest
 		
 		Assertions.assertThrows(IllegalArgumentException.class, () -> { table.get(2, 100); });
 	}
+
+	@Test
+	void treeFieldKey()
+	{
+		Table table = new Table();
+		table.set(2, 200, false, true);
+		
+		assertTrue(table.contains(2, 200, false));
+		assertFalse(table.contains(2, 200, true));
+		assertEquals(true, table.get(2, 200, false));
+		
+		Assertions.assertThrows(IllegalArgumentException.class, () -> { table.get(2, 200, true); });
+	}
 }

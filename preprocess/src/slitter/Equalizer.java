@@ -1,6 +1,6 @@
 package slitter;
 
-public class Algorithm
+public class Equalizer
 {
 	private Instance _instance;
 	private Table _table;
@@ -10,7 +10,7 @@ public class Algorithm
 	private int _item1;
 	private int _item2;
 	
-	public Algorithm(Instance instance, int combination1, int item1, int combination2, int item2)
+	public Equalizer(Instance instance, int combination1, int item1, int combination2, int item2)
 	{
 		_instance = instance;
 		_combination1 = combination1;
