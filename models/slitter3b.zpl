@@ -28,7 +28,7 @@ param trim[<c> in C] := sum <i> in I: a[c,i];
 param ancho := max <c> in C: sum <i> in I: a[c,i];
 
 # Pares de items que pueden coincidir
-set posibles := { read archivoposibles as "<1n,2n,3n,4n>" };
+set posibles := { read archivo + ".pos" as "<1n,2n,3n,4n>" };
 
 # Variables
 var x[C0*C0] binary;
