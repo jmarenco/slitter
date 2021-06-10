@@ -24,9 +24,9 @@ public class Heuristic
 		
 		for(int i=0; i<100; ++i)
 		{
-			for(Solution solution: SolutionRelinker.relink(randomSolution(), randomSolution()))
-				_candidates.add(LocalSearch.run(solution));
-			
+			ArrayList<Solution> path = SolutionRelinker.relink(randomSolution(), randomSolution());
+
+			_candidates.addAll(localSearch(path));
 			Collections.sort(_candidates, (j,k) -> k.objective() - j.objective());
 			
 			while( _candidates.size() > _candidateSize )
@@ -38,15 +38,45 @@ public class Heuristic
 	
 	private void initializeCandidates()
 	{
-		_candidates = new ArrayList<Solution>();
-		
+		ArrayList<Solution> initial = new ArrayList<Solution>();
+
 		for(int i=0; i<_candidateSize; ++i)
-			_candidates.add(LocalSearch.run(Solution.shuffled(_instance)));
+			initial.add(Solution.shuffled(_instance));
+		
+		_candidates = localSearch(initial);
 	}
 	
 	private Solution randomSolution()
 	{
 		return _candidates.get(_random.nextInt(_candidates.size()));
+	}
+	
+	private ArrayList<Solution> localSearch(ArrayList<Solution> initialSolutions)
+	{
+		ArrayList<LocalSearchThread> threads = new ArrayList<LocalSearchThread>();
+		ArrayList<Solution> ret = new ArrayList<Solution>(); 
+		
+		for(Solution initial: initialSolutions)
+		{
+			LocalSearchThread thread = new LocalSearchThread(initial);
+			threads.add(thread);
+			thread.start();
+		}
+		
+		for(LocalSearchThread thread: threads)
+		{
+			try
+			{
+				thread.join();
+				ret.add(thread.getFinal());
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return ret;
 	}
 	
 	public Solution grasp()
