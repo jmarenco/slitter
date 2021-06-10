@@ -5,6 +5,7 @@ public class Solution
 	private Instance _instance;
 	private Permutation _combinations;
 	private Permutation[] _items;
+	private int _objective;
 	
 	public static Solution shuffled(Instance instance)
 	{
@@ -43,11 +44,15 @@ public class Solution
 	{
 		_instance = instance;
 		_items = new Permutation[_instance.getCombinations()];
+		_objective = -1;
 	}
 	
 	public int objective()
 	{
-		int ret = 0;
+		if( _objective >= 0 )
+			return _objective;
+		
+		_objective = 0;
 		for(int i=0; i<_instance.getCombinations()-1; ++i)
 		{
 			int combination = _combinations.get(i);
@@ -57,11 +62,11 @@ public class Solution
 			for(int k=0; k<_instance.getItems(next); ++k)
 			{
 				if( position(combination, j) == position(next, k) )
-					++ret;
+					_objective++;
 			}
 		}
 		
-		return ret;
+		return _objective;
 	}
 	
 	public int position(int combination, int item)
@@ -81,21 +86,25 @@ public class Solution
 	public void swap(int combination1, int combination2)
 	{
 		_combinations.swap(combination1, combination2);
+		_objective = -1;
 	}
 
 	public void swap(int combination, int item1, int item2)
 	{
 		_items[combination].swap(item1, item2);
+		_objective = -1;
 	}
 	
 	public void insert(int combination1, int position)
 	{
 		_combinations.insert(combination1, position);
+		_objective = -1;
 	}
 
 	public void insert(int combination, int item1, int position)
 	{
 		_items[combination].insert(item1, position);
+		_objective = -1;
 	}
 	
 	public Instance getInstance()
@@ -141,10 +150,12 @@ public class Solution
 	public void setPermutation(Permutation permutation)
 	{
 		_combinations = permutation;
+		_objective = -1;
 	}
 
 	public void setPermutation(int combinacion, Permutation permutation)
 	{
 		_items[combinacion] = permutation;
+		_objective = -1;
 	}
 }
