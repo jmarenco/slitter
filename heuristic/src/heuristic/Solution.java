@@ -27,6 +27,17 @@ public class Solution
 		
 		return ret;
 	}
+	
+	public static Solution cloned(Solution solution)
+	{
+		Solution ret = new Solution(solution.getInstance());
+		ret._combinations = solution._combinations.clone();
+		
+		for(int i=0; i<solution.getInstance().getCombinations(); ++i)
+			ret._items[i] = solution._items[i].clone();
+		
+		return ret;		
+	}
 
 	private Solution(Instance instance)
 	{
@@ -64,6 +75,46 @@ public class Solution
 			++i;
 		}
 		
-		return ret + _items[combination].get(item);
+		return ret + _instance.getItem(combination, item);
+	}
+	
+	public void swap(int combination1, int combination2)
+	{
+		_combinations.swap(combination1, combination2);
+	}
+
+	public void swap(int combination, int item1, int item2)
+	{
+		_items[combination].swap(item1, item2);
+	}
+	
+	public Instance getInstance()
+	{
+		return _instance;
+	}
+	
+	public int getCombination(int i)
+	{
+		return _combinations.get(i);
+	}
+	
+	public boolean equals(Solution that)
+	{
+		if( that == null )
+			return false;
+		
+		if( this.getInstance() != that.getInstance() )
+			return false;
+		
+		if( this._combinations.equals(that._combinations) == false )
+			return false;
+		
+		for(int i=0; i<_instance.getCombinations(); ++i)
+		{
+			if( this._items[i].equals(that._items[i]) == false )
+				return false;
+		}
+		
+		return true;
 	}
 }

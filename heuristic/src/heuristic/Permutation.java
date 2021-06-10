@@ -27,6 +27,11 @@ public class Permutation
 			_index[i] = i;
 	}
 	
+	private Permutation(int[] index)
+	{
+		_index = index.clone();
+	}
+	
 	public int size()
 	{
 		return _index.length;
@@ -55,5 +60,21 @@ public class Permutation
 		int aux = _index[index1];
 		_index[index1] = _index[index2];
 		_index[index2] = aux;
+	}
+	
+	public Permutation clone()
+	{
+		return new Permutation(_index);
+	}
+	
+	public boolean equals(Permutation that)
+	{
+		if( this.size() != that.size() )
+			return false;
+		
+		for(int i=0; i<size(); ++i) if( this.get(i) != that.get(i) )
+			return false;
+		
+		return true;
 	}
 }
