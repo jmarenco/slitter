@@ -13,6 +13,7 @@ public class EntryPoint
 		}
 
 		long start = System.currentTimeMillis();
+		System.out.println("Processing file " + args[0]);
 
 		Instance instance = new Instance(args[0]);
 		Heuristic heuristic = new Heuristic(instance);
@@ -20,5 +21,6 @@ public class EntryPoint
 		
 		System.out.println("Objective value: " + solution.objective());
 		System.out.printf("Total time: %.2f sec.", (System.currentTimeMillis() - start) / 1000.0);
+		System.out.println();
 	}
 }

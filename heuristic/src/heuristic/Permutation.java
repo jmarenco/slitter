@@ -62,6 +62,28 @@ public class Permutation
 		_index[index2] = aux;
 	}
 	
+	public void insert(int index, int position)
+	{
+		if( position < index )
+		{
+			int aux = _index[index];
+
+			for(int i=index; i>position; --i)
+				_index[i] = _index[i-1];
+			
+			_index[position] = aux;
+		}
+		else if( position > index )
+		{
+			int aux = _index[index];
+
+			for(int i=index; i<position; ++i)
+				_index[i] = _index[i+1];
+			
+			_index[position] = aux;
+		}
+	}
+	
 	public Permutation clone()
 	{
 		return new Permutation(_index);

@@ -88,6 +88,16 @@ public class Solution
 		_items[combination].swap(item1, item2);
 	}
 	
+	public void insert(int combination1, int position)
+	{
+		_combinations.insert(combination1, position);
+	}
+
+	public void insert(int combination, int item1, int position)
+	{
+		_items[combination].insert(item1, position);
+	}
+	
 	public Instance getInstance()
 	{
 		return _instance;
