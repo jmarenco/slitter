@@ -10,7 +10,8 @@ public class Heuristic
 	private ArrayList<Solution> _candidates;
 	private Random _random;
 	
-	private static int _candidateSize = 10;
+	private static int _candidateSize = 25;
+	private static int _iterations = 200;
 	
 	public Heuristic(Instance instance)
 	{
@@ -22,7 +23,7 @@ public class Heuristic
 	{
 		initializeCandidates();
 		
-		for(int i=0; i<100; ++i)
+		for(int i=0; i<_iterations; ++i)
 		{
 			ArrayList<Solution> path = SolutionRelinker.relink(randomSolution(), randomSolution());
 
