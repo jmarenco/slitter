@@ -127,4 +127,24 @@ public class Solution
 		
 		return true;
 	}
+	
+	public Permutation getPermutation()
+	{
+		return _combinations;
+	}
+	
+	public Permutation getPermutation(int combination)
+	{
+		return _items[combination];
+	}
+	
+	public void setPermutation(Permutation permutation)
+	{
+		_combinations = permutation;
+	}
+
+	public void setPermutation(int combinacion, Permutation permutation)
+	{
+		_items[combinacion] = permutation;
+	}
 }

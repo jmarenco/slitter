@@ -42,6 +42,14 @@ public class Permutation
 		return _index[index];
 	}
 	
+	public int indexOf(int element)
+	{
+		for(int i=0; i<this.size(); ++i) if( this.get(i) == element )
+			return i;
+		
+		throw new IllegalArgumentException();
+	}
+	
 	public void shuffle()
 	{
 		ArrayList<Integer> aux = new ArrayList<Integer>();
@@ -98,5 +106,14 @@ public class Permutation
 			return false;
 		
 		return true;
+	}
+	
+	@Override public String toString()
+	{
+		String ret = "";
+		for(int i=0; i<_index.length; ++i)
+			ret += (i > 0 ? ", " : "") + _index[i];
+		
+		return "[" + ret + "]";
 	}
 }
