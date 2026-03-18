@@ -14,6 +14,12 @@ dvar int w[C][I];
 dvar int cw[C][I];
 dvar int cc[C][I];
 
+execute
+{
+  cp.param.timeLimit = 3600;
+  cp.param.Workers = 1;
+}
+
 maximize sum(i in C, j in I: i > 0 && width[i][j] > 0) cc[i][j];
  
 subject to
