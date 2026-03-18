@@ -1,16 +1,12 @@
 using CP;
 
-int n = 4;
-int m = 3;
+int n = ...;
+int m = ...;
 
 range C = 0..(n-1);
 range I = 0..(m-1);
 
-int width[C][I] = [
- [200, 200, 0],
- [100, 200, 300],
- [150, 250, 0],
- [250, 250, 0] ];
+int width[C][I] = ...;
 
 dvar int x[C] in C;
 dvar int y[C][I] in I;
