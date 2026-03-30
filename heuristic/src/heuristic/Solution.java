@@ -69,6 +69,11 @@ public class Solution
 		return _objective;
 	}
 	
+	public int items(int combination)
+	{
+		return _items[combination].size();
+	}
+	
 	public int position(int combination, int item)
 	{
 		int ret = 0;
@@ -81,6 +86,44 @@ public class Solution
 		}
 		
 		return ret + _instance.getItem(combination, item);
+	}
+	
+	public int positionVerbose(int combination, int item)
+	{
+		System.out.println("pos " + combination + " " + item + " " + _items[combination]);
+		int ret = 0;
+		int i = 0;
+		
+		while( _items[combination].get(i) != item )
+		{
+			ret += _instance.getItem(combination, _items[combination].get(i));
+			++i;
+		}
+		
+		return ret + _instance.getItem(combination, item);
+	}
+	
+	public int slitterPosition(int combination, int slitterNumber)
+	{
+		int ret = 0;
+		
+		for(int i=0; i<=slitterNumber; ++i)
+			ret += _instance.getItem(combination, _items[combination].get(i));
+		
+		return ret;
+	}
+	
+	public boolean coincidentSlitterPosition(int combination, int slitterNumber)
+	{
+		if( combination == 0 )
+			return false;
+		
+		int target = slitterPosition(combination, slitterNumber);
+		
+		for(int i=0; i<this.items(combination-1); ++i) if( slitterPosition(combination-1, i) == target )
+			return true;
+		
+		return false;
 	}
 	
 	public void swap(int combination1, int combination2)
