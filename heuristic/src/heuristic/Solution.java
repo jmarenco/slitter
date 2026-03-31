@@ -73,7 +73,13 @@ public class Solution
 	{
 		return _items[combination].size();
 	}
-	
+
+	public int itemsPermutation(int combination)
+	{
+		int index = _combinations.get(combination);
+		return _items[index].size();
+	}
+
 	public int position(int combination, int item)
 	{
 		int ret = 0;
@@ -105,10 +111,11 @@ public class Solution
 	
 	public int slitterPosition(int combination, int slitterNumber)
 	{
+		int index = _combinations.get(combination);
 		int ret = 0;
 		
 		for(int i=0; i<=slitterNumber; ++i)
-			ret += _instance.getItem(combination, _items[combination].get(i));
+			ret += _instance.getItem(index, _items[index].get(i));
 		
 		return ret;
 	}
@@ -120,7 +127,7 @@ public class Solution
 		
 		int target = slitterPosition(combination, slitterNumber);
 		
-		for(int i=0; i<this.items(combination-1); ++i) if( slitterPosition(combination-1, i) == target )
+		for(int i=0; i<this.itemsPermutation(combination-1); ++i) if( slitterPosition(combination-1, i) == target )
 			return true;
 		
 		return false;

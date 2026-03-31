@@ -14,12 +14,12 @@ public class TikzWriter
 		
 		for(int i=0; i<solution.getInstance().getCombinations(); ++i)
 		{
-			int top = (height + margin) * i;
+			int top = (height + margin) * (solution.getInstance().getCombinations() - i - 1);
 			int bottom = top + height;
 			double start = 0;
 			double anterior = 0;
 			
-			for(int j=0; j<solution.items(i); ++j)
+			for(int j=0; j<solution.itemsPermutation(i); ++j)
 			{
 				double end = solution.slitterPosition(i,j) / scale;
 				
@@ -27,7 +27,7 @@ public class TikzWriter
 				System.out.println("\\node[align=center] at (" + (start+end)/2 + "," + (top+bottom)/2 + ") {\\footnotesize " + (int)(solution.slitterPosition(i,j) - anterior) + "};");
 				
 				if( solution.coincidentSlitterPosition(i, j) )
-					System.out.println("\\draw[->] (" + (end-15) + "," + (top+bottom)/2 + ") -- (" + (end-5) + "," + (top+bottom)/2 + ");");
+					System.out.println("\\draw[arrows = {-Latex[width=4pt, length=4pt]}] (" + (end-10) + "," + (top+bottom)/2 + ") -- (" + (end-1) + "," + (top+bottom)/2 + ");");
 
 				start = end;
 				anterior = solution.slitterPosition(i, j);
@@ -37,8 +37,8 @@ public class TikzWriter
 		}
 
 		int tops = (height + margin) * solution.getInstance().getCombinations();
-		System.out.println("\\draw[dashed] (-2,-2) -- (-2," + (tops+2) + ");");
-		System.out.println("\\draw[dashed] (" + (maxs+2) + ",-2) -- (" + (maxs+2) + "," + (tops+2) + ");");
+		System.out.println("\\draw[dashed] (-2,-2) -- (-2," + tops + ");");
+		System.out.println("\\draw[dashed] (" + (maxs+2) + ",-2) -- (" + (maxs+2) + "," + tops + ");");
 		System.out.println("\\end{tikzpicture}");
 		System.out.println("\\end{center}");
 		System.out.println("\\caption{" + description + " solution for the instance " + instance.replaceAll(".dat", "").toUpperCase() + ".} % Objective = " + solution.objective());
